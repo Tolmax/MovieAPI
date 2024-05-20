@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" sizes="32*32">
+    <link rel="icon" href="./img/icon.svg" type="image-svg+xml">
+
     <link rel="stylesheet" href="./css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,39 +27,41 @@
     <div class="container">
         <div class="movies"></div>
         <div class="popup">
-            <div class="content">
-                <img class="popup__image" src="" alt="">
-                <h2>
-                    <span class="popup__title">Название</span>
-                    <span class="popup__release-year">Год</span>
-                </h2>
-                <ul class="popup__movie-infor">
-                    <div class="popup__loader"></div>
-                    <li class="popup__ganer">Жанр: </li>
-                    <li class="popup__runtime">Время: </li>
-                    <li class="popup__url">Сайт: <a href="">ee</a></li>
-                    <li class="popup__description">Описание: </li>
-                </ul>
-                <button type="button" class="popup__close">ЗАКРЫТЬ</button>
+            <div class="popup__content">
+                <!-- <div class="popup__loader"> -->
+                    <img class="popup__image" src="" alt="">
+                    <h2>
+                        <span class="popup__title"></span>
+                        <span class="popup__release-year"></span>
+                    </h2>
+                    <ul class="popup__movie-infor">
+                        <!-- <div class="popup__loader"></div> -->
+                        <li class="popup__ganer">Жанр: </li>
+                        <li class="popup__runtime">Страна: </li>
+                        <li class="popup__url">Сайт: <a href=""></a></li>
+                        <li class="popup__description">Описание: </li>
+                    </ul>
+                    <button type="button" class="popup__close"></button>
+                </div>
+                <!-- <div> -->
+                </div>
             </div>
-        </div>
-    </div>
 
-    <template id="movie">
-        <div class="movie">
-            <div class="movie__cover-inner">
-                <img src="" alt="" class="movie_cover" />
-                <div class="movie__cover--darkened"></div>
-            </div>
-            <div class="movie__info">
-                <div class="movie__title">Mortal Combat</div>
-                <div class="movie__category">Фантастика</div>
-                <div class="movie__year">Неизвестно</div>
-                <div class="movie__rating">9</div>
-            </div>
-        </div>
-    </template>
-    <script src="./js/script.js"></script>
+            <template id="movie">
+                <div class="movie">
+                    <div class="movie__cover-inner">
+                        <img src="" alt="" class="movie__cover" />
+                        <div class="movie__cover--darkened"></div>
+                    </div>
+                    <div class="movie__info">
+                        <div class="movie__title">Mortal Combat</div>
+                        <div class="movie__category">Фантастика</div>
+                        <div class="movie__year">Неизвестно</div>
+                        <div class="movie__rating">9</div>
+                    </div>
+                </div>
+            </template>
+            <script src="./src/script.js"></script>
 </body>
 
 </html>
