@@ -212,9 +212,15 @@ body {
     /* box-sizing: border-box; */
 }
 
+/* .popup__li {
+    font-size: 16px;
+    color: #22ff0e;
+    font-weight: 200;
+} */
 .popup__ganer {
     font-size: 16px;
     color: #22ff0e;
+    font-weight: 200;
 }
 
 .popup__runtime {
