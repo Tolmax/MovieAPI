@@ -110,9 +110,20 @@ function createCard(data) {
   getclassbyRate(data.ratingKinopoisk);
 
   imageDarkened.addEventListener("click", function () {
-    const movieUrl = `${API_URL_MOVIE_INFO}${data.kinopoiskId}`;
-    getMoviesDetails(movieUrl);
-    // generatePopup(data);
+    // let movieUrl = `${API_URL_MOVIE_INFO}${data.kinopoiskId}`;
+    // console.log(movieUrl);
+
+    if (data.kinopoiskId === undefined) {
+      let movieUrl = `${API_URL_MOVIE_INFO}${data.filmId}`;
+      console.log(movieUrl);
+      getMoviesDetails(movieUrl);
+    } else {
+      let movieUrl = `${API_URL_MOVIE_INFO}${data.kinopoiskId}`;
+      console.log(movieUrl);
+      getMoviesDetails(movieUrl);
+    }
+    // const movieUrl = `${API_URL_MOVIE_INFO}${data.kinopoiskId}`;
+    // getMoviesDetails(movieUrl);
   });
 
   image.src = data.posterUrlPreview;

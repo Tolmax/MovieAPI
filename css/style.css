@@ -214,28 +214,37 @@ body {
 
 /* .popup__li {
     font-size: 16px;
-    color: #22ff0e;
+    color: burlywood;
     font-weight: 200;
 } */
 .popup__ganer {
     font-size: 16px;
-    color: #22ff0e;
+    color: blueviolet;
     font-weight: 200;
 }
 
 .popup__runtime {
     font-size: 16px;
     color: #22ff0e;
+    font-weight: 200;
 }
 
 .popup__url {
     font-size: 16px;
+    color: burlywood;
+    font-weight: 200;
+}
+
+.popup__urlword {
+    font-size: 16px;
     color: #22ff0e;
+    font-weight: 200;
 }
 
 .popup__description {
     font-size: 16px;
     color: #22ff0e;
+    font-weight: 200;
 }
 
 .popup__close {
@@ -263,6 +272,11 @@ body {
     opacity: 0.6;
 }
 
+.popup__similar {
+    margin-left: 15px;
+    padding: 3px;
+    
+}
 .stop-scrolling {
     height: 100%;
     overflow: hidden;
