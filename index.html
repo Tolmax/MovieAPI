@@ -29,40 +29,53 @@
         <div class="popup">
             <div class="popup__content">
                 <!-- <div class="popup__loader"> -->
-                    <img class="popup__image" src="" alt="">
-                    <h2>
-                        <span class="popup__title"></span>
-                        <span class="popup__release-year"></span>
-                    </h2>
-                    <ul class="popup__movie-infor ">
-                        <!-- <div class="popup__loader"></div> -->
-                        <li class="popup__ganer">Жанр: </li>
-                        <li class="popup__runtime">Продолжительность: </li>
-                        <li class="popup__urlword">Сайт: <a class="popup__url" target="_blank" href="#"></a></li>
-                        <li class="popup__description">Описание: </li>
-                    </ul>
-                    <button type="button" class="popup__close"></button>
-                    <button type="button" class="popup__similar"></button>
-                </div>
-                <!-- <div> -->
+                <img class="popup__image" src="" alt="">
+                <h2>
+                    <span class="popup__title"></span>
+                    <span class="popup__release-year"></span>
+                </h2>
+                <ul class="popup__movie-infor ">
+                    <!-- <div class="popup__loader"></div> -->
+                    <li class="popup__ganer">Жанр: </li>
+                    <li class="popup__runtime">Продолжительность: </li>
+                    <li class="popup__urlword">Сайт: <a class="popup__url" target="_blank" href="#"></a></li>
+                    <li class="popup__description">Описание: </li>
+                </ul>
+                <button type="button" class="popup__close"></button>
+                <div class="btns">
+                    <button type="button" class="popup__similar">Похожие фильмы</button>
+                    <button type="button" class="popup__similar">Смотреть фильм</button>
                 </div>
             </div>
+            <!-- <div> -->
+        </div>
+    </div>
 
-            <template id="movie">
-                <div class="movie">
-                    <div class="movie__cover-inner">
-                        <img src="" alt="" class="movie__cover" />
-                        <div class="movie__cover--darkened"></div>
-                    </div>
-                    <div class="movie__info">
-                        <div class="movie__title">Mortal Combat</div>
-                        <div class="movie__category">Фантастика</div>
-                        <div class="movie__year">Неизвестно</div>
-                        <div class="movie__rating">9</div>
-                    </div>
-                </div>
-            </template>
-            <script src="./src/script.js"></script>
+    <template id="movie">
+        <div class="movie">
+            <div class="movie__cover-inner">
+                <img src="" alt="" class="movie__cover" />
+                <div class="movie__cover--darkened"></div>
+            </div>
+            <div class="movie__info">
+                <div class="movie__title">Mortal Combat</div>
+                <div class="movie__category">Фантастика</div>
+                <div class="movie__year">Неизвестно</div>
+                <div class="movie__rating">9</div>
+            </div>
+        </div>
+    </template>
+
+    <template id="similarmovie">
+        <div class="similarmovie">
+            <!-- <div class="similarmovie__cover-inner"> -->
+                <img src="" alt="" class="similarmovie__cover" />
+                <div class="similarmovie__cover--darkened"></div>
+                <div class="similarmovie__title">Mortal Combat</div>
+            <!-- </div> -->
+        </div>
+    </template>
+    <script src="./src/script.js"></script>
 </body>
 
 </html>
