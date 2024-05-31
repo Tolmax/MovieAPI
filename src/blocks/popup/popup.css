@@ -1,0 +1,25 @@
+@import url(./__btns/popup__btns.css);
+@import url(./__close/popup__close.css);
+@import url(./__content/popup__content.css);
+@import url(./__description/popup__description.css);
+@import url(./__ganer/popup__ganer.css);
+@import url(./__image/popup__image.css);
+@import url(./__is-opened/popup__is-opened.css);
+@import url(./__movie-infor/popup__movie-infor.css);
+@import url(./__release-year/popup__release-year.css);
+@import url(./__runtime/popup__runtime.css);
+@import url(./__similar/popup__similar.css);
+@import url(./__title/popup__title.css);
+
+.popup {
+    display: none;
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, .5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+    overflow: hidden;
+}

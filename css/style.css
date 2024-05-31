@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-body {
+.body {
     height: 100vh;
     background-color: #1a191f;
     font-family: "Open Sans", sans-serif;
@@ -15,7 +15,7 @@ body {
     max-width: 1200px;
 }
 
-.header__content {
+.header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -118,15 +118,15 @@ body {
     -o-border-radius: 50px;
 }
 
-.movie__rating--green {
+.movie__rating_green {
     border: 1px solid green;
 }
 
-.movie__rating--orange {
+.movie__rating_orange {
     border: 1px solid orange;
 }
 
-.movie__rating--red {
+.movie__rating_red {
     border: 1px solid red;
 }
 
@@ -255,13 +255,14 @@ body {
     opacity: 0.6;
 }
 
-.btns {
+.popup__btns {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
     width: 100%;
 }
+
 .popup__similar {
     background-color: #1a191f98;
     border-color: 2px solid black;
@@ -270,6 +271,7 @@ body {
     color: rgba(245, 245, 245, 0.808);
     cursor: pointer;
 }
+
 .stop-scrolling {
     height: 100%;
     overflow: hidden;

@@ -1,0 +1,8 @@
+.popup__similar {
+    background-color: #1a191f98;
+    border-color: 2px solid black;
+    border-radius: 10px;
+    font-size: 20px;
+    color: rgba(245, 245, 245, 0.808);
+    cursor: pointer;
+}

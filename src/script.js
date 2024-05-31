@@ -62,6 +62,9 @@ function getsearchedMovies(URL) {
 
 //  запрос на получение данных фильма по ID
 
+let filmId
+console.log(filmId)
+
 function getMoviesDetails(URL) {
   fetch(URL, {
     method: "GET",
@@ -73,7 +76,10 @@ function getMoviesDetails(URL) {
     .then((res) => res.json())
     .then((respData) => {
       console.log(respData);
+      filmId = respData.kinopoiskId;
+      console.log(filmId);
       generatePopup(respData);
+      return filmId
     })
     .catch((error) => {
       console.log("Ошибка при выполнении функции: " + error);
@@ -81,9 +87,6 @@ function getMoviesDetails(URL) {
 }
 
 //  запрос на получение похожих фильмов
-// const apisimilarMovie = `${API_URL_SIMILAR}${respData.kinopoiskId}${'/similars'}`
-// const apisimilarMovie = `${API_URL_SIMILAR}${'448'}${'/similars'}`
-// getsimilarMovies(apisimilarMovie);
 
 function getsimilarMovies(URL) {
   fetch(URL, {
@@ -110,7 +113,9 @@ similarMovies.addEventListener("click", (e) => {
   e.preventDefault();
   document.querySelector(".movies").innerHTML = "";
   closePopup(popupOpen);
-  const apisimilarMovie = `${API_URL_SIMILAR}${data.filmId}${"/similars"}`;
+  console.log('click')
+  console.log(filmId)
+  const apisimilarMovie = `${API_URL_SIMILAR}${filmId}${"/similars"}`;
   console.log(apisimilarMovie);
   getsimilarMovies(apisimilarMovie);
 });
@@ -139,11 +144,6 @@ function createCard(data) {
   const rating = movieEl.querySelector(".movie__rating");
   const ratingColor = movieEl.querySelector(".movie__rating");
   const infor = movieEl.querySelector(".movie__info");
-  // const popupInfor = document.querySelector('.popup__movie-infor')
-  // console.log(popupInfor);
-  // const similarMovies = document.querySelector('.popup__similar');
-
-  // console.log(similarMovies);
 
   if (data.ratingKinopoisk === undefined) {
     const el = infor.querySelector(".movie__rating");
@@ -164,8 +164,6 @@ function createCard(data) {
       let movieUrl = `${API_URL_MOVIE_INFO}${data.kinopoiskId}`;
       getMoviesDetails(movieUrl);
     }
-    // const movieUrl = `${API_URL_MOVIE_INFO}${data.kinopoiskId}`;
-    // getMoviesDetails(movieUrl);
   });
 
   image.src = data.posterUrlPreview;
@@ -184,36 +182,39 @@ function createCard(data) {
 
 function createsimilarCard(data) {
   const movieEl1 = userTemplate1.querySelector(".similarmovie").cloneNode(true);
-  console.log(movieEl1);
+  // console.log(movieEl1);
   const image1 = movieEl1.querySelector(".similarmovie__cover");
-  console.log(image1);
-
+  // console.log(image1);
   const movieDetails = movieEl1.querySelector(".similarmovie__cover--darkened");
   const title = movieEl1.querySelector(".similarmovie__title");
 
-  image1.src = data.posterUrlPreview;
-  image1.alt = data.nameRu;
-  title.textContent = data.nameRu;
+  // getclassbyRate(data.ratingKinopoisk);
 
   // вешаем слушатель для получения деталей о фильме
 
   movieDetails.addEventListener("click", function () {
-    // if (data.kinopoiskId === undefined) {
-    //   let movieUrl = `${API_URL_MOVIE_INFO}${data.filmId}`;
-    //   getMoviesDetails(movieUrl);
-    // } else {
-    //   let movieUrl = `${API_URL_MOVIE_INFO}${data.kinopoiskId}`;
-    //   getMoviesDetails(movieUrl);
-    // }
-    const movieUrl = `${API_URL_MOVIE_INFO}${data.filmId}`;
-    getMoviesDetails(movieUrl);
+    if (data.kinopoiskId === undefined) {
+      let movieUrl = `${API_URL_MOVIE_INFO}${data.filmId}`;
+      getMoviesDetails(movieUrl);
+    } else {
+      let movieUrl = `${API_URL_MOVIE_INFO}${data.kinopoiskId}`;
+      getMoviesDetails(movieUrl);
+    }
+    // const movieUrl = `${API_URL_MOVIE_INFO}${data.kinopoiskId}`;
+    // getMoviesDetails(movieUrl);
   });
 
+  image1.src = data.posterUrlPreview;
+  image1.alt = data.nameRu;
+  title.textContent = data.nameRu;
+  
   return movieEl1;
 }
 
 function showMovies(data) {
   data.items.forEach((movie) => {
+    // let filmId = movie.kinopoiskId;
+    // console.log(filmId);
     const cardMovie = createCard(movie);
     document.querySelector(".movies").appendChild(cardMovie);
   });
@@ -238,11 +239,11 @@ function showsimilarMovies(data) {
 
 function getclassbyRate(vote) {
   if (vote > 7) {
-    return "movie__rating--green";
+    return "movie__rating_green";
   } else if (vote > 5) {
-    return "movie__rating--orange";
+    return "movie__rating_orange";
   } else {
-    return "movie__rating--red";
+    return "movie__rating_red";
   }
 }
 

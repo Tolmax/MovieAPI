@@ -1,0 +1,17 @@
+@import url(./__category/movie__category.css);
+@import url(./__cover--darkened/movie__cover--darkened.css);
+@import url(./__cover-inner/movie__cover--inner.css);
+@import url(./__cover/movie__cover.css);
+@import url(./__info/movie__info.css);
+@import url(./__rating/movie__rating.css);
+@import url(./__rating/movie__rating_green.css);
+@import url(./__rating/movie__rating_orange.css);
+@import url(./__rating/movie__rating_red.css);
+@import url(./__title/movie__title.css);
+@import url(./__year/movie__year.css);
+
+.movie {
+    width: 240px;
+    margin: 10px;
+    position: relative;
+}

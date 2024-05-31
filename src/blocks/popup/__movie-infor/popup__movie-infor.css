@@ -1,0 +1,6 @@
+.popup__movie-infor {
+    padding: 5px;
+    list-style-type: none;
+    overflow: auto;
+    /* box-sizing: border-box; */
+}

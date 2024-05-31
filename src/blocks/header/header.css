@@ -1,0 +1,11 @@
+@import url(./__logo/header__logo.css);
+@import url(./__search/header__search.css);
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    height: 80px;
+    padding: 16px;
+}

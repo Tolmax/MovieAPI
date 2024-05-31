@@ -1,0 +1,10 @@
+@import url(../vendors/normalize.css);
+@import url(../vendors/fonts.css);
+@import url(../blocks/body/body.css);
+@import url(../blocks/container/container.css);
+@import url(../blocks/header/header.css);
+@import url(../blocks/movie/movie.css);
+@import url(../blocks/movies/movies.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/similarmovie/similarmovie.css);
+@import url(../blocks/stop-scrolling/stop-scrolling.css);
