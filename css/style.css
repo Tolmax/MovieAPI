@@ -101,13 +101,14 @@ body {
 
 .movie__rating {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 20px;
+    left: 20px;
     width: 36px;
     height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     color: white;
     background-color: #1a191f;
     border-radius: 50px;
