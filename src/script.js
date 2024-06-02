@@ -8,6 +8,7 @@ const API_URL_SEARCH =
 const API_URL_SIMILAR = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
 const API_URL_MOVIE_INFO =
   "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
+const API_URL_URLS = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/'
 
 const userTemplate = document.querySelector("#movie").content;
 const insertMovies = document.querySelector(".movie");
@@ -16,7 +17,8 @@ const searchMovie = form.querySelector(".header__search");
 const stopScrolling = document.querySelector(".body");
 
 const userTemplate1 = document.querySelector("#similarmovie").content;
-const similarMovies = document.querySelector(".popup__similar");
+const similarMovies = document.querySelector(".popup__movie-similar");
+const movieUrls = document.querySelector(".popup__movie-url");
 
 getMovies(API_URL_POPULAR);
 
@@ -40,7 +42,7 @@ function getMovies(URL) {
     });
 }
 
-//  запрос на получение фильмов по поиску
+//  запрос для поиска фильма по словам
 
 function getsearchedMovies(URL) {
   fetch(URL, {
@@ -59,6 +61,18 @@ function getsearchedMovies(URL) {
       console.log("Ошибка при выполнении функции: " + error);
     });
 }
+
+// вешаем слушатель для поиска фильма по словам
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  document.querySelector(".movies").innerHTML = "";
+  const apisearchMovie = `${API_URL_SEARCH}${searchMovie.value}`;
+  if (searchMovie.value) {
+    getsearchedMovies(apisearchMovie);
+    searchMovie.value = "";
+  }
+});
 
 //  запрос на получение данных фильма по ID
 
@@ -113,24 +127,53 @@ similarMovies.addEventListener("click", (e) => {
   e.preventDefault();
   document.querySelector(".movies").innerHTML = "";
   closePopup(popupOpen);
-  console.log('click')
-  console.log(filmId)
   const apisimilarMovie = `${API_URL_SIMILAR}${filmId}${"/similars"}`;
-  console.log(apisimilarMovie);
   getsimilarMovies(apisimilarMovie);
 });
 
-// вешаем слушатель для поиска фильма по словам
+//  запрос на получение URLs выбранного фильма
 
-form.addEventListener("submit", (e) => {
+function getMovieURLs(URL) {
+  fetch(URL, {
+    method: "GET",
+    headers: {
+      "X-API-KEY": "99116293-2534-4b37-b131-ce5f5c970a85",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((respData) => {
+      const data = respData.items
+      console.log(respData);
+      console.log(data);
+      console.log(data.url);
+      closePopup(popupOpen);
+      // console.log(respData.platform);
+      // console.log(respData.url);
+      // console.log(respData.items.url);
+      generatePopupUrl(respData);
+      // return data
+    })
+    // .then(console.log(data))
+    .catch((error) => {
+      console.log("Ошибка при выполнении функции: " + error);
+    });
+}
+
+// вешаем слушатель на получение URLs выбранного фильма
+
+movieUrls.addEventListener("click", (e) => {
   e.preventDefault();
-  document.querySelector(".movies").innerHTML = "";
-  const apisearchMovie = `${API_URL_SEARCH}${searchMovie.value}`;
-  if (searchMovie.value) {
-    getsearchedMovies(apisearchMovie);
-    searchMovie.value = "";
-  }
+  // document.querySelector(".movies").innerHTML = "";
+  // closePopup(popupOpen);
+  console.log('click')
+  console.log(filmId)
+  const apiMovieUrls = `${API_URL_URLS}${filmId}${"/external_sources?page=1"}`;
+  console.log(apiMovieUrls);
+  getMovieURLs(apiMovieUrls);
 });
+
+
 
 // // // // функция создания карточки на сайте из ответа API
 
@@ -182,9 +225,7 @@ function createCard(data) {
 
 function createsimilarCard(data) {
   const movieEl1 = userTemplate1.querySelector(".similarmovie").cloneNode(true);
-  // console.log(movieEl1);
   const image1 = movieEl1.querySelector(".similarmovie__cover");
-  // console.log(image1);
   const movieDetails = movieEl1.querySelector(".similarmovie__cover--darkened");
   const title = movieEl1.querySelector(".similarmovie__title");
 
@@ -200,21 +241,18 @@ function createsimilarCard(data) {
       let movieUrl = `${API_URL_MOVIE_INFO}${data.kinopoiskId}`;
       getMoviesDetails(movieUrl);
     }
-    // const movieUrl = `${API_URL_MOVIE_INFO}${data.kinopoiskId}`;
-    // getMoviesDetails(movieUrl);
   });
 
   image1.src = data.posterUrlPreview;
   image1.alt = data.nameRu;
   title.textContent = data.nameRu;
+  // console.log(data.nameRu)
   
   return movieEl1;
 }
 
 function showMovies(data) {
   data.items.forEach((movie) => {
-    // let filmId = movie.kinopoiskId;
-    // console.log(filmId);
     const cardMovie = createCard(movie);
     document.querySelector(".movies").appendChild(cardMovie);
   });
@@ -229,7 +267,7 @@ function showSearchMovies(data) {
 
 function showsimilarMovies(data) {
   data.items.forEach((movie) => {
-    console.log(movie);
+    // console.log(movie);
     const similarMovie = createsimilarCard(movie);
     document.querySelector(".movies").appendChild(similarMovie);
   });
@@ -247,9 +285,9 @@ function getclassbyRate(vote) {
   }
 }
 
-//  Модальнле окно
+//  Модальнле окно 1
 
-const popupOpen = document.querySelector(".popup");
+const popupOpen = document.querySelector(".popup__type-movie-details");
 const popupImage = popupOpen.querySelector(".popup__image");
 const popupTitle = popupOpen.querySelector(".popup__title");
 const popupYear = popupOpen.querySelector(".popup__release-year");
@@ -257,7 +295,7 @@ const popupGaner = popupOpen.querySelector(".popup__ganer");
 const popupRuntime = popupOpen.querySelector(".popup__runtime");
 const popupUrl = popupOpen.querySelector(".popup__url");
 const popupDescrip = popupOpen.querySelector(".popup__description");
-const popupClose = popupOpen.querySelector(".popup__close");
+const popupClose = document.querySelector(".popup__close");
 
 function openPopup(popup) {
   popup.classList.add("popup_is-opened");
@@ -273,6 +311,7 @@ function closePopup(popup) {
 function closeEsc(evt) {
   if (evt.key === "Escape") {
     closePopup(popupOpen);
+    closePopup(popupOpenURL);
   }
 }
 
@@ -294,12 +333,45 @@ function generatePopup(data) {
 
 popupClose.addEventListener("click", function () {
   closePopup(popupOpen);
+  closePopup(popupOpenURL);
 });
 
 window.addEventListener("click", function (e) {
   if (e.target === popupOpen) {
-    closePopup(popupOpen);
+    closePopup(popupOpen)
+  } else if (e.target === popupOpenURL) {
+    closePopup(popupOpenURL);
   }
 });
+
+//  Модальнле окно 2
+
+const popupOpenURL = document.querySelector('.popup__type-urls');
+const popupPlatform = popupOpenURL.querySelector('.popup__platform');
+const popupMovieUrl = popupOpenURL.querySelector('.popup__movie-url');
+
+
+function generatePopupUrl(data) {
+  // popupPlatform.textContent = '' //data.platform;
+  // popupMovieUrl.textContent = '' //`${data.url}`;
+  stopScrolling.classList.add("stop-scrolling");
+  console.log(data.items.profile)
+  QQ(data);
+  openPopup(popupOpenURL);
+}
+
+function QQ(data) {
+
+  popupPlatform.textContent = `${data.items.map(
+  (platform) => `${platform.platform}`)}`;
+  popupMovieUrl.href = `${data.items.map(
+    (url) => `${url.url}`)}`;
+//   popupMovieUrl.textContent = `${data.items.map(
+//     (url) => `${url.url}`)}`;
+}
+
+// popupGaner.textContent = `Жанр: ${data.genres.map(
+//   (genre) => ` ${genre.genre}`
+// )}`;
 
 // export {getMovies}

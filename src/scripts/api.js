@@ -1,3 +1,7 @@
+import { createCard, createsimilarCard } from './films'
+import { openPopup, closePopup, closeEsc, generatePopup } from './modals'
+
+
 const API_KEY = "99116293-2534-4b37-b131-ce5f5c970a85";
 const API_URL_POPULAR =
   "https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_250_MOVIES&page=1";
@@ -7,7 +11,6 @@ const API_URL_SIMILAR = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
 const API_URL_MOVIE_INFO =
   "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
 
-  let filmId
 //  запрос на получение топ 250 фильмов
 
 function getMovies(URL) {
@@ -77,7 +80,10 @@ function getMoviesDetails(URL) {
     .then((res) => res.json())
     .then((respData) => {
       console.log(respData);
+      filmId = respData.kinopoiskId;
+      console.log(filmId);
       generatePopup(respData);
+      return filmId
     })
     .catch((error) => {
       console.log("Ошибка при выполнении функции: " + error);
@@ -85,28 +91,25 @@ function getMoviesDetails(URL) {
 }
 
 //  запрос на получение похожих фильмов
-// const apisimilarMovie = `${API_URL_SIMILAR}${respData.kinopoiskId}${'/similars'}`
-// const apisimilarMovie = `${API_URL_SIMILAR}${'448'}${'/similars'}`
-// getsimilarMovies(apisimilarMovie);
 
 function getsimilarMovies(URL) {
-  fetch(URL, {
-    method: "GET",
-    headers: {
-      "X-API-KEY": "99116293-2534-4b37-b131-ce5f5c970a85",
-      "Content-Type": "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .then((respData) => {
-      console.log(respData);
-      showsimilarMovies(respData);
-      closePopup(popupOpen);
+    fetch(URL, {
+      method: "GET",
+      headers: {
+        "X-API-KEY": "99116293-2534-4b37-b131-ce5f5c970a85",
+        "Content-Type": "application/json",
+      },
     })
-    .catch((error) => {
-      console.log("Ошибка при выполнении функции: " + error);
-    });
-}
+      .then((res) => res.json())
+      .then((respData) => {
+        console.log(respData);
+        showsimilarMovies(respData);
+        closePopup(popupOpen);
+      })
+      .catch((error) => {
+        console.log("Ошибка при выполнении функции: " + error);
+      });
+  }
 
 function showsimilarMovies(data) {
   data.items.forEach((movie) => {
@@ -116,6 +119,27 @@ function showsimilarMovies(data) {
   });
 }
 
+//  запрос на получение URLs выбранного фильма
+
+function getMovieURLs(URL) {
+    fetch(URL, {
+      method: "GET",
+      headers: {
+        "X-API-KEY": "99116293-2534-4b37-b131-ce5f5c970a85",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((respData) => {
+        console.log(respData);
+        // showsimilarMovies(respData);
+        closePopup(popupOpen);
+      })
+      .catch((error) => {
+        console.log("Ошибка при выполнении функции: " + error);
+      });
+  }
+  
 export {
   API_KEY,
   API_URL_POPULAR,

@@ -50,3 +50,5 @@ window.addEventListener("click", function (e) {
     closePopup(popupOpen);
   }
 });
+
+export { openPopup, closePopup, closeEsc, generatePopup };

@@ -26,16 +26,28 @@
     </header>
     <div class="container">
         <div class="movies"></div>
-        <div class="popup">
+        <div class="popup popup__type-urls">
             <div class="popup__content">
-                <!-- <div class="popup__loader"> -->
+                <h2>Смотрите фильм по ссылке</h2>
+                <ul class="popup__movie-urls">
+                    <!-- <li class="popup__movie-data">
+                        <span class="popup__platform">OKKO</span>
+                        <a class="popup__movieurl" target="_blank" href="#">URL</a>
+                    </li> -->
+                    <li class="popup__platform">OKKO</li>
+                    <li class="popup__urlword"><a class="popup__movieurl" target="_blank" href="#">URL</a></li>
+                </ul>
+                <button type="button" class="popup__close"></button>
+            </div>
+        </div>
+        <div class="popup popup__type-movie-details">
+            <div class="popup__content">
                 <img class="popup__image" src="" alt="">
                 <h2>
                     <span class="popup__title"></span>
                     <span class="popup__release-year"></span>
                 </h2>
                 <ul class="popup__movie-infor ">
-                    <!-- <div class="popup__loader"></div> -->
                     <li class="popup__ganer">Жанр: </li>
                     <li class="popup__runtime">Продолжительность: </li>
                     <li class="popup__urlword">Сайт: <a class="popup__url" target="_blank" href="#"></a></li>
@@ -43,39 +55,39 @@
                 </ul>
                 <button type="button" class="popup__close"></button>
                 <div class="popup__btns">
-                    <button type="button" class="popup__similar">Похожие фильмы</button>
-                    <button type="button" class="popup__similar">Смотреть фильм</button>
+                    <button type="button" class="popup__movie-similar">Похожие фильмы</button>
+                    <button type="button" class="popup__movie-url">Смотреть фильм</button>
                 </div>
             </div>
             <!-- <div> -->
         </div>
-    </div>
 
-    <template id="movie">
-        <div class="movie">
-            <div class="movie__cover-inner">
-                <img src="" alt="" class="movie__cover" />
-                <div class="movie__cover--darkened"></div>
-            </div>
-            <div class="movie__info">
-                <div class="movie__title">Mortal Combat</div>
-                <div class="movie__category">Фантастика</div>
-                <div class="movie__year">Неизвестно</div>
-                <div class="movie__rating">9</div>
-            </div>
-        </div>
-    </template>
 
-    <template id="similarmovie">
-        <div class="similarmovie">
-            <!-- <div class="similarmovie__cover-inner"> -->
+        <template id="movie">
+            <div class="movie">
+                <div class="movie__cover-inner">
+                    <img src="" alt="" class="movie__cover" />
+                    <div class="movie__cover--darkened"></div>
+                </div>
+                <div class="movie__info">
+                    <div class="movie__title">Mortal Combat</div>
+                    <div class="movie__category">Фантастика</div>
+                    <div class="movie__year">Неизвестно</div>
+                    <div class="movie__rating">9</div>
+                </div>
+            </div>
+        </template>
+
+        <template id="similarmovie">
+            <div class="similarmovie">
+                <!-- <div class="similarmovie__cover-inner"> -->
                 <img src="" alt="" class="similarmovie__cover" />
                 <div class="similarmovie__cover--darkened"></div>
                 <div class="similarmovie__title">Mortal Combat</div>
-            <!-- </div> -->
-        </div>
-    </template>
-    <script src="./src/script.js"></script>
+                <!-- </div> -->
+            </div>
+        </template>
+        <script src="./src/script.js"></script>
 </body>
 
 </html>
