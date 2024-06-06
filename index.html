@@ -8,10 +8,10 @@
     <link rel="icon" href="./img/icon.svg" type="image-svg+xml">
 
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-        rel="stylesheet">
+        rel="stylesheet"> -->
     <title>Movie App</title>
 </head>
 
@@ -20,27 +20,25 @@
         <div class="header">
             <a href="./index.html" class="header__logo">Movie App</a>
             <form>
-                <input type="text" class="header__search" placeholder="Поиск" />
+                <input type="text" class="header__search" placeholder="Поиск по словам" />
             </form>
         </div>
     </header>
     <div class="container">
         <div class="movies"></div>
-        <div class="popup popup__type-urls">
+        <div class="popup popup__type-urls popup_is-animated">
             <div class="popup__content">
-                <h2>Смотрите фильм по ссылке</h2>
-                <ul class="popup__movie-urls">
-                    <!-- <li class="popup__movie-data">
-                        <span class="popup__platform">OKKO</span>
-                        <a class="popup__movieurl" target="_blank" href="#">URL</a>
-                    </li> -->
-                    <li class="popup__platform">OKKO</li>
-                    <li class="popup__urlword"><a class="popup__movieurl" target="_blank" href="#">URL</a></li>
-                </ul>
+                <h2 class="popup__title">Смотрите фильм по ссылке</h2>
+                <div class="popup__movieurls">
+                    <!-- <div class="popup__movieurls-item">
+                        <span class="popup__platform">Название кинотеатра</span>
+                        <a class="popup__movieurl" target="_blank" href="#"></a> 
+                    </div> -->
+                </div>
                 <button type="button" class="popup__close"></button>
             </div>
         </div>
-        <div class="popup popup__type-movie-details">
+        <div class="popup popup__type-movie-details popup_is-animated">
             <div class="popup__content">
                 <img class="popup__image" src="" alt="">
                 <h2>
@@ -59,7 +57,6 @@
                     <button type="button" class="popup__movie-url">Смотреть фильм</button>
                 </div>
             </div>
-            <!-- <div> -->
         </div>
 
 
@@ -80,15 +77,25 @@
 
         <template id="similarmovie">
             <div class="similarmovie">
-                <!-- <div class="similarmovie__cover-inner"> -->
                 <img src="" alt="" class="similarmovie__cover" />
                 <div class="similarmovie__cover--darkened"></div>
                 <div class="similarmovie__title">Mortal Combat</div>
-                <!-- </div> -->
+            </div>
+        </template>
+
+        <template id="urls">
+            <div class="urls__container">
+                <h2 class="urls__patform"></h2>
+                <div class="urls__site">Сайт: <a class="urls__adress" target="_blank" href="#">URL</a></div>
             </div>
         </template>
         <script src="./src/script.js"></script>
 </body>
-
+<footer class="footer">
+      <a href="index.html" class="footer__logo">PET PROJECT</a>
+      <p class="footer__copyright">
+        © 2024 Movie API
+      </p>
+</footer>
 </html>
 <!--movie__rating--green        это используем для app.js-->
