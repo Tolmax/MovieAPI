@@ -355,7 +355,7 @@ function generatePopupUrl(data) {
   // popupPlatform.textContent = '' //data.platform;
   // popupMovieUrl.textContent = '' //`${data.url}`;
   stopScrolling.classList.add("stop-scrolling");
-  console.log(data.items.profile)
+  console.log(data.items.platform)
   QQ(data);
   openPopup(popupOpenURL);
 }
@@ -364,8 +364,9 @@ function QQ(data) {
 
   popupPlatform.textContent = `${data.items.map(
   (platform) => `${platform.platform}`)}`;
-  popupMovieUrl.href = `${data.items.map(
-    (url) => `${url.url}`)}`;
+  console.log(data.items.platform)
+  // popupMovieUrl.href = `${data.items.map(
+  //   (url) => `${url.url}`)}`;
 //   popupMovieUrl.textContent = `${data.items.map(
 //     (url) => `${url.url}`)}`;
 }
