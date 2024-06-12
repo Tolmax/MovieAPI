@@ -8,7 +8,7 @@ const API_URL_SEARCH =
 const API_URL_SIMILAR = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
 const API_URL_MOVIE_INFO =
   "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
-const API_URL_URLS = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/'
+const API_URL_URLS = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
 
 const userTemplate = document.querySelector("#movie").content;
 const insertMovies = document.querySelector(".movie");
@@ -19,6 +19,8 @@ const stopScrolling = document.querySelector(".body");
 const userTemplate1 = document.querySelector("#similarmovie").content;
 const similarMovies = document.querySelector(".popup__movie-similar");
 const movieUrls = document.querySelector(".popup__movie-url");
+
+const urlsTemplate = document.querySelector("#urls");
 
 getMovies(API_URL_POPULAR);
 
@@ -34,7 +36,6 @@ function getMovies(URL) {
   })
     .then((res) => res.json())
     .then((respData) => {
-      console.log(respData);
       showMovies(respData);
     })
     .catch((error) => {
@@ -76,8 +77,7 @@ form.addEventListener("submit", (e) => {
 
 //  запрос на получение данных фильма по ID
 
-let filmId
-console.log(filmId)
+let filmId;
 
 function getMoviesDetails(URL) {
   fetch(URL, {
@@ -89,11 +89,9 @@ function getMoviesDetails(URL) {
   })
     .then((res) => res.json())
     .then((respData) => {
-      console.log(respData);
       filmId = respData.kinopoiskId;
-      console.log(filmId);
       generatePopup(respData);
-      return filmId
+      return filmId;
     })
     .catch((error) => {
       console.log("Ошибка при выполнении функции: " + error);
@@ -143,18 +141,9 @@ function getMovieURLs(URL) {
   })
     .then((res) => res.json())
     .then((respData) => {
-      const data = respData.items
-      console.log(respData);
-      console.log(data);
-      console.log(data.url);
       closePopup(popupOpen);
-      // console.log(respData.platform);
-      // console.log(respData.url);
-      // console.log(respData.items.url);
       generatePopupUrl(respData);
-      // return data
     })
-    // .then(console.log(data))
     .catch((error) => {
       console.log("Ошибка при выполнении функции: " + error);
     });
@@ -164,18 +153,11 @@ function getMovieURLs(URL) {
 
 movieUrls.addEventListener("click", (e) => {
   e.preventDefault();
-  // document.querySelector(".movies").innerHTML = "";
-  // closePopup(popupOpen);
-  console.log('click')
-  console.log(filmId)
   const apiMovieUrls = `${API_URL_URLS}${filmId}${"/external_sources?page=1"}`;
-  console.log(apiMovieUrls);
   getMovieURLs(apiMovieUrls);
 });
 
-
-
-// // // // функция создания карточки на сайте из ответа API
+// функция создания карточки на сайте из ответа API
 
 function createCard(data) {
   const movieEl = userTemplate.querySelector(".movie").cloneNode(true);
@@ -195,7 +177,6 @@ function createCard(data) {
   }
 
   getclassbyRate(data.ratingKinopoisk);
-
 
   // вешаем слушатель для получения деталей о фильме
 
@@ -218,18 +199,15 @@ function createCard(data) {
   ratingColor.classList.add(`${getclassbyRate(data.ratingKinopoisk)}`);
 
   return movieEl;
-  
 }
 
-// // // // функция создания карточек на сайте из ответа API - похожие фильмы
+// функция создания карточек на сайте из ответа API - похожие фильмы
 
 function createsimilarCard(data) {
   const movieEl1 = userTemplate1.querySelector(".similarmovie").cloneNode(true);
   const image1 = movieEl1.querySelector(".similarmovie__cover");
   const movieDetails = movieEl1.querySelector(".similarmovie__cover--darkened");
   const title = movieEl1.querySelector(".similarmovie__title");
-
-  // getclassbyRate(data.ratingKinopoisk);
 
   // вешаем слушатель для получения деталей о фильме
 
@@ -246,8 +224,7 @@ function createsimilarCard(data) {
   image1.src = data.posterUrlPreview;
   image1.alt = data.nameRu;
   title.textContent = data.nameRu;
-  // console.log(data.nameRu)
-  
+
   return movieEl1;
 }
 
@@ -267,7 +244,6 @@ function showSearchMovies(data) {
 
 function showsimilarMovies(data) {
   data.items.forEach((movie) => {
-    // console.log(movie);
     const similarMovie = createsimilarCard(movie);
     document.querySelector(".movies").appendChild(similarMovie);
   });
@@ -295,25 +271,33 @@ const popupGaner = popupOpen.querySelector(".popup__ganer");
 const popupRuntime = popupOpen.querySelector(".popup__runtime");
 const popupUrl = popupOpen.querySelector(".popup__url");
 const popupDescrip = popupOpen.querySelector(".popup__description");
-const popupClose = document.querySelector(".popup__close");
+const popupClose = popupOpen.querySelector(".popup__close");
 
 function openPopup(popup) {
   popup.classList.add("popup_is-opened");
-  document.addEventListener("keydown", closeEsc);
+  document.addEventListener("keydown", (evt) => {
+    if (evt.key === "Escape") {
+      closePopup(popup);
+    }
+  });
+  popupClose.addEventListener("click", function () {
+    closePopup(popup);
+  });
+  popupClose2.addEventListener("click", function () {
+    closePopup(popup);
+  });
+  window.addEventListener("click", function (e) {
+    if (e.target === popup) {
+      closePopup(popup);
+    }
+  });
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_is-opened");
-  document.removeEventListener("keydown", closeEsc);
   stopScrolling.classList.remove("stop-scrolling");
 }
 
-function closeEsc(evt) {
-  if (evt.key === "Escape") {
-    closePopup(popupOpen);
-    closePopup(popupOpenURL);
-  }
-}
 
 function generatePopup(data) {
   popupImage.src = data.posterUrlPreview;
@@ -331,48 +315,46 @@ function generatePopup(data) {
   openPopup(popupOpen);
 }
 
-popupClose.addEventListener("click", function () {
-  closePopup(popupOpen);
-  closePopup(popupOpenURL);
-});
-
-window.addEventListener("click", function (e) {
-  if (e.target === popupOpen) {
-    closePopup(popupOpen)
-  } else if (e.target === popupOpenURL) {
-    closePopup(popupOpenURL);
-  }
-});
-
 //  Модальнле окно 2
 
-const popupOpenURL = document.querySelector('.popup__type-urls');
-const popupPlatform = popupOpenURL.querySelector('.popup__platform');
-const popupMovieUrl = popupOpenURL.querySelector('.popup__movie-url');
-
+const popupOpenURL = document.querySelector(".popup__type-urls");
+const popupPlatform = popupOpenURL.querySelector(".popup__platform");
+const popupMovieUrl = popupOpenURL.querySelector(".popup__movieurl");
+const popupClose2 = popupOpenURL.querySelector(".popup__close");
+const popupMovieUrlsNode = document.querySelector('.popup__movieurls');
 
 function generatePopupUrl(data) {
-  // popupPlatform.textContent = '' //data.platform;
-  // popupMovieUrl.textContent = '' //`${data.url}`;
+  renderPopupUrlContent(data);
   stopScrolling.classList.add("stop-scrolling");
-  console.log(data.items.platform)
-  QQ(data);
   openPopup(popupOpenURL);
 }
 
-function QQ(data) {
+function renderPopupUrlContent(data) {
+  const films = data.items;
 
-  popupPlatform.textContent = `${data.items.map(
-  (platform) => `${platform.platform}`)}`;
-  console.log(data.items.platform)
-  // popupMovieUrl.href = `${data.items.map(
-  //   (url) => `${url.url}`)}`;
-//   popupMovieUrl.textContent = `${data.items.map(
-//     (url) => `${url.url}`)}`;
+  popupMovieUrlsNode.textContent = '';
+  for (i = 0; i < films.length; i++) {
+    const { logoUrl, platform, url } = films[i];
+    popupMovieUrlsNode.innerHTML += `
+      <div class="popup__movieurls-item">
+        <img class="popup__movieurls-item-img" src="${logoUrl}">
+        <a class="popup__movieurls-item-url" target="_blank" href="${url}">${platform}</a> 
+      </div>
+    `;
+
+    // const popupMovieUrlsItemNode = createPopupMovieUrlsItemNode(films[i]);
+    // popupMovieUrlsNode.append(popupMovieUrlsItemNode);
+  }
 }
 
-// popupGaner.textContent = `Жанр: ${data.genres.map(
-//   (genre) => ` ${genre.genre}`
-// )}`;
+function createPopupMovieUrlsItemNode({ logoUrl, platform, url }) {
+  const divNode = document.createElement('div');
 
-// export {getMovies}
+  divNode.classList.add('popup__movieurls-item')
+  divNode.innerHTML = `
+    <img class="popup__movieurls-item-img" src="${logoUrl}">
+    <a class="popup__movieurls-item-url" target="_blank" href="${url}">${platform}</a> 
+  `;
+
+  return divNode;
+}
