@@ -1,7 +1,7 @@
 .popup__description {
-    font-size: 16px;
+    /* font-size: 16px;
     color: burlywood;
-    font-weight: 200;
+    font-weight: 200; */
     text-overflow: ellipsis;
     /* overflow: auto; */
 }

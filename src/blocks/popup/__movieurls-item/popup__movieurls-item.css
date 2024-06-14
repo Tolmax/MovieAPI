@@ -1,0 +1,4 @@
+.popup__movieurls-item {
+    display: flex;
+    gap: 10px;
+}
