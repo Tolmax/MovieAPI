@@ -1,18 +1,23 @@
 import {
-  API_KEY,
+  // API_KEY,
   API_URL_POPULAR,
   API_URL_SEARCH,
   API_URL_SIMILAR,
-  API_URL_MOVIE_INFO,
+  // API_URL_MOVIE_INFO,
   getMovies,
   getsearchedMovies,
-  getMoviesDetails,
+  // getMoviesDetails,
   getsimilarMovies,
+  getMovieURLs,
+  filmId
 } from "./api";
-import { openPopup, closePopup, closeEsc, generatePopup } from "./modals";
+import { closePopup } from "./modals";
 
 const similarMovies = document.querySelector(".popup__similar");
 const form = document.querySelector("form");
+const searchMovie = form.querySelector(".header__search");
+const movieUrls = document.querySelector(".popup__movie-url");
+
 
 let filmId
 console.log(filmId)
@@ -25,8 +30,7 @@ similarMovies.addEventListener("click", (e) => {
   e.preventDefault();
   document.querySelector(".movies").innerHTML = "";
   closePopup(popupOpen);
-  const apisimilarMovie = `${API_URL_SIMILAR}${data.filmId}${"/similars"}`;
-  console.log(apisimilarMovie);
+  const apisimilarMovie = `${API_URL_SIMILAR}${filmId}${"/similars"}`;
   getsimilarMovies(apisimilarMovie);
 });
 
@@ -53,4 +57,12 @@ similarMovies.addEventListener("click", (e) => {
   const apisimilarMovie = `${API_URL_SIMILAR}${filmId}${"/similars"}`;
   console.log(apisimilarMovie);
   getsimilarMovies(apisimilarMovie);
+});
+
+// вешаем слушатель на получение URLs выбранного фильма
+
+movieUrls.addEventListener("click", (e) => {
+  e.preventDefault();
+  const apiMovieUrls = `${API_URL_URLS}${filmId}${"/external_sources?page=1"}`;
+  getMovieURLs(apiMovieUrls);
 });

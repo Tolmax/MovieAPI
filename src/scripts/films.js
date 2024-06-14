@@ -1,11 +1,14 @@
-const userTemplate = document.querySelector("#movie").content;
-const insertMovies = document.querySelector(".movie");
-const form = document.querySelector("form");
-const searchMovie = form.querySelector(".header__search");
-const stopScrolling = document.querySelector(".body");
+import { API_URL_MOVIE_INFO, getMoviesDetails } from "./api";
 
+const userTemplate = document.querySelector("#movie").content;
+// const insertMovies = document.querySelector(".movie");
+// const form = document.querySelector("form");
+// const searchMovie = form.querySelector(".header__search");
+// const stopScrolling = document.querySelector(".body");
+ 
 const userTemplate1 = document.querySelector("#similarmovie").content;
-const similarMovies = document.querySelector(".popup__similar");
+
+// функция создания карточки на сайте из ответа API
 
 function createCard(data) {
   const movieEl = userTemplate.querySelector(".movie").cloneNode(true);
@@ -49,29 +52,13 @@ function createCard(data) {
   return movieEl;
 }
 
-// функция цвета границы кружка в зависимости от рейтинга
-
-function getclassbyRate(vote) {
-  if (vote > 7) {
-    return "movie__rating_green";
-  } else if (vote > 5) {
-    return "movie__rating_orange";
-  } else {
-    return "movie__rating_red";
-  }
-}
-
-// // // // функция создания карточек на сайте из ответа API - похожие фильмы
+// функция создания карточек на сайте из ответа API - похожие фильмы
 
 function createsimilarCard(data) {
   const movieEl1 = userTemplate1.querySelector(".similarmovie").cloneNode(true);
-  // console.log(movieEl1);
   const image1 = movieEl1.querySelector(".similarmovie__cover");
-  // console.log(image1);
   const movieDetails = movieEl1.querySelector(".similarmovie__cover--darkened");
   const title = movieEl1.querySelector(".similarmovie__title");
-
-  // getclassbyRate(data.ratingKinopoisk);
 
   // вешаем слушатель для получения деталей о фильме
 
@@ -91,5 +78,19 @@ function createsimilarCard(data) {
 
   return movieEl1;
 }
+
+// функция цвета границы кружка в зависимости от рейтинга
+
+function getclassbyRate(vote) {
+  if (vote > 7) {
+    return "movie__rating_green";
+  } else if (vote > 5) {
+    return "movie__rating_orange";
+  } else {
+    return "movie__rating_red";
+  }
+}
+
+
 
 export { createCard, createsimilarCard };

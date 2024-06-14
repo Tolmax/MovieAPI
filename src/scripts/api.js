@@ -23,7 +23,6 @@ function getMovies(URL) {
   })
     .then((res) => res.json())
     .then((respData) => {
-      console.log(respData);
       showMovies(respData);
     })
     .catch((error) => {
@@ -33,14 +32,12 @@ function getMovies(URL) {
 
 function showMovies(data) {
   data.items.forEach((movie) => {
-    let filmId = movie.kinopoiskId;
-    // console.log(filmId);
     const cardMovie = createCard(movie);
     document.querySelector(".movies").appendChild(cardMovie);
   });
 }
 
-//  запрос на получение фильмов по поиску
+//  запрос для поиска фильма по словам
 
 function getsearchedMovies(URL) {
   fetch(URL, {
@@ -69,6 +66,8 @@ function showSearchMovies(data) {
 
 //  запрос на получение данных фильма по ID
 
+// let filmId;
+
 function getMoviesDetails(URL) {
   fetch(URL, {
     method: "GET",
@@ -79,11 +78,9 @@ function getMoviesDetails(URL) {
   })
     .then((res) => res.json())
     .then((respData) => {
-      console.log(respData);
       filmId = respData.kinopoiskId;
-      console.log(filmId);
       generatePopup(respData);
-      return filmId
+      return filmId;
     })
     .catch((error) => {
       console.log("Ошибка при выполнении функции: " + error);
@@ -93,27 +90,26 @@ function getMoviesDetails(URL) {
 //  запрос на получение похожих фильмов
 
 function getsimilarMovies(URL) {
-    fetch(URL, {
-      method: "GET",
-      headers: {
-        "X-API-KEY": "99116293-2534-4b37-b131-ce5f5c970a85",
-        "Content-Type": "application/json",
-      },
+  fetch(URL, {
+    method: "GET",
+    headers: {
+      "X-API-KEY": "99116293-2534-4b37-b131-ce5f5c970a85",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((respData) => {
+      console.log(respData);
+      showsimilarMovies(respData);
+      closePopup(popupOpen);
     })
-      .then((res) => res.json())
-      .then((respData) => {
-        console.log(respData);
-        showsimilarMovies(respData);
-        closePopup(popupOpen);
-      })
-      .catch((error) => {
-        console.log("Ошибка при выполнении функции: " + error);
-      });
-  }
+    .catch((error) => {
+      console.log("Ошибка при выполнении функции: " + error);
+    });
+}
 
 function showsimilarMovies(data) {
   data.items.forEach((movie) => {
-    console.log(movie);
     const similarMovie = createsimilarCard(movie);
     document.querySelector(".movies").appendChild(similarMovie);
   });
@@ -122,23 +118,22 @@ function showsimilarMovies(data) {
 //  запрос на получение URLs выбранного фильма
 
 function getMovieURLs(URL) {
-    fetch(URL, {
-      method: "GET",
-      headers: {
-        "X-API-KEY": "99116293-2534-4b37-b131-ce5f5c970a85",
-        "Content-Type": "application/json",
-      },
+  fetch(URL, {
+    method: "GET",
+    headers: {
+      "X-API-KEY": "99116293-2534-4b37-b131-ce5f5c970a85",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((respData) => {
+      closePopup(popupOpen);
+      generatePopupUrl(respData);
     })
-      .then((res) => res.json())
-      .then((respData) => {
-        console.log(respData);
-        // showsimilarMovies(respData);
-        closePopup(popupOpen);
-      })
-      .catch((error) => {
-        console.log("Ошибка при выполнении функции: " + error);
-      });
-  }
+    .catch((error) => {
+      console.log("Ошибка при выполнении функции: " + error);
+    });
+}
   
 export {
   API_KEY,
@@ -150,4 +145,6 @@ export {
   getsearchedMovies,
   getMoviesDetails,
   getsimilarMovies,
+  getMovieURLs,
+  filmId
 };
