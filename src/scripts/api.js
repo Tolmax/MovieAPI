@@ -1,5 +1,5 @@
 import { createCard, createsimilarCard } from './films'
-import { openPopup, closePopup, closeEsc, generatePopup } from './modals'
+import { openPopup, closePopup, generatePopup, generatePopupUrl, popupOpen } from './modals'
 
 
 const API_KEY = "99116293-2534-4b37-b131-ce5f5c970a85";
@@ -10,6 +10,7 @@ const API_URL_SEARCH =
 const API_URL_SIMILAR = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
 const API_URL_MOVIE_INFO =
   "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
+const API_URL_URLS = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
 
 //  запрос на получение топ 250 фильмов
 
@@ -66,7 +67,8 @@ function showSearchMovies(data) {
 
 //  запрос на получение данных фильма по ID
 
-// let filmId;
+let filmId;
+// console.log(filmId)
 
 function getMoviesDetails(URL) {
   fetch(URL, {
@@ -127,6 +129,7 @@ function getMovieURLs(URL) {
   })
     .then((res) => res.json())
     .then((respData) => {
+      console.log(respData);
       closePopup(popupOpen);
       generatePopupUrl(respData);
     })
@@ -141,6 +144,7 @@ export {
   API_URL_SEARCH,
   API_URL_SIMILAR,
   API_URL_MOVIE_INFO,
+  API_URL_URLS,
   getMovies,
   getsearchedMovies,
   getMoviesDetails,

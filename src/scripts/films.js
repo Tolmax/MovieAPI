@@ -1,5 +1,5 @@
 import { API_URL_MOVIE_INFO, getMoviesDetails } from "./api";
-
+import { openPopup, closePopup, generatePopup, generatePopupUrl } from "./modals";
 const userTemplate = document.querySelector("#movie").content;
 // const insertMovies = document.querySelector(".movie");
 // const form = document.querySelector("form");

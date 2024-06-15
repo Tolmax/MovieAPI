@@ -1,3 +1,19 @@
+import {
+  // API_KEY,
+  API_URL_POPULAR,
+  API_URL_SEARCH,
+  API_URL_SIMILAR,
+  API_URL_URLS,
+  API_URL_MOVIE_INFO,
+  getMovies,
+  getsearchedMovies,
+  // getMoviesDetails,
+  getsimilarMovies,
+  getMovieURLs,
+  filmId
+} from "./api";
+
+
 //  Модальнле окно 1
 
 const popupOpen = document.querySelector(".popup__type-movie-details");
@@ -10,6 +26,8 @@ const popupUrl = popupOpen.querySelector(".popup__url");
 const popupDescrip = popupOpen.querySelector(".popup__description");
 const popupClose = popupOpen.querySelector(".popup__close");
 const stopScrolling = document.querySelector(".body");
+const similarMovies = document.querySelector(".popup__movie-similar");
+const movieUrls = popupOpen.querySelector(".popup__movie-url");
 
 function openPopup(popup) {
   popup.classList.add("popup_is-opened");
@@ -52,11 +70,29 @@ function generatePopup(data) {
   openPopup(popupOpen);
 }
 
+// вешаем слушатель для поиска похожих фильмов
+
+similarMovies.addEventListener("click", (e) => {
+  e.preventDefault();
+  document.querySelector(".movies").innerHTML = "";
+  closePopup(popupOpen);
+  const apisimilarMovie = `${API_URL_SIMILAR}${filmId}${"/similars"}`;
+  getsimilarMovies(apisimilarMovie);
+});
+
+// вешаем слушатель на получение URLs выбранного фильма
+
+movieUrls.addEventListener("click", (e) => {
+  e.preventDefault();
+  const apiMovieUrls = `${API_URL_URLS}${filmId}${"/external_sources?page=1"}`;
+  getMovieURLs(apiMovieUrls);
+});
+
 //  Модальнле окно 2
 
 const popupOpenURL = document.querySelector(".popup__type-urls");
-const popupPlatform = popupOpenURL.querySelector(".popup__platform");
-const popupMovieUrl = popupOpenURL.querySelector(".popup__movieurl");
+// const popupPlatform = popupOpenURL.querySelector(".popup__platform");
+// const popupMovieUrl = popupOpenURL.querySelector(".popup__movieurl");
 const popupClose2 = popupOpenURL.querySelector(".popup__close");
 const popupMovieUrlsNode = document.querySelector(".popup__movieurls");
 
@@ -70,7 +106,7 @@ function renderPopupUrlContent(data) {
   const films = data.items;
 
   popupMovieUrlsNode.textContent = "";
-  for (i = 0; i < films.length; i++) {
+  for (let i = 0; i < films.length; i++) {
     const { logoUrl, platform, url } = films[i];
     popupMovieUrlsNode.innerHTML += `
       <div class="popup__movieurls-item">
@@ -78,6 +114,14 @@ function renderPopupUrlContent(data) {
         <a class="popup__movieurls-item-url" target="_blank" href="${url}">${platform}</a> 
       </div>
     `;
+
+    // вешаем слушатель на получение URLs выбранного фильма
+
+// movieUrls.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   const apiMovieUrls = `${API_URL_URLS}${filmId}${"/external_sources?page=1"}`;
+//   getMovieURLs(apiMovieUrls);
+// });
     // второй вариант 
     // const popupMovieUrlsItemNode = createPopupMovieUrlsItemNode(films[i]);
     // popupMovieUrlsNode.append(popupMovieUrlsItemNode);
@@ -98,4 +142,4 @@ function renderPopupUrlContent(data) {
 //   return divNode;
 // }
 
-export { openPopup, closePopup, closeEsc, generatePopup, generatePopupUrl };
+export { openPopup, closePopup, generatePopup, generatePopupUrl, popupOpen };
