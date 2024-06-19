@@ -478,7 +478,7 @@ img {
 }
 .movie__cover--darkened {
     background-color: black;
-    opacity: 0.5;
+    opacity: 0.15;
     position: absolute;
     top: 0;
     left: 0;
@@ -615,10 +615,10 @@ img {
     padding-top: 15px;
 }
 .popup_is-opened {
-    /* display: block !important; */
-    visibility: visible !important;
-    opacity: 1;
-    pointer-events: all;
+	/* display: block !important; */
+	visibility: visible !important;
+	opacity: 1;
+	pointer-events: all;
 }
 .popup__movie-infor {
     padding: 5px;
@@ -709,21 +709,21 @@ img {
 
 }
 .popup {
-    display: block;
-    visibility: hidden;
-    background-color: rgba(0, 0, 0, .5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 10;
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding: 40px;
-    transition-property: opacity, visibility;
-    transition-timing-function: ease;
-    transition-duration: 0.5s;
+	display: block;
+	visibility: hidden;
+	background-color: rgba(0, 0, 0, .5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 10;
+	overflow-x: hidden;
+	overflow-y: auto;
+	padding: 40px;
+	transition-property: opacity, visibility;
+	transition-timing-function: ease;
+	transition-duration: 0.5s;
 }
 .similarmovie__cover--darkened {
     background-color: black;
@@ -754,9 +754,9 @@ img {
     color: yellowgreen;
 }
 .similarmovie {
-    width: 240px;
-    margin: 10px;
-    position: relative;
+	width: 240px;
+	margin: 10px;
+	position: relative;
 }
 .stop-scrolling {
     height: 100%;
