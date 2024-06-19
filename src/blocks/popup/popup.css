@@ -20,19 +20,19 @@
 @import url(./__title/popup__title.css);
 
 .popup {
-    display: block;
-    visibility: hidden;
-    background-color: rgba(0, 0, 0, .5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 10;
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding: 40px;
-    transition-property: opacity, visibility;
-    transition-timing-function: ease;
-    transition-duration: 0.5s;
+	display: block;
+	visibility: hidden;
+	background-color: rgba(0, 0, 0, .5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 10;
+	overflow-x: hidden;
+	overflow-y: auto;
+	padding: 40px;
+	transition-property: opacity, visibility;
+	transition-timing-function: ease;
+	transition-duration: 0.5s;
 }
